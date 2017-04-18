@@ -1,0 +1,14 @@
+.idea
+nohup.out
+
+__pycache__
+*.pyc
+*.csv
+*.xlsx
+*.log
+*.pid
+*.zip
+
+node_modules
+bower_components
+tmp
