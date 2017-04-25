@@ -45,32 +45,51 @@ class PastFootballDaysParser(BaseParser):
 
     def parse(self, text):
         soup = bs4.BeautifulSoup(text, 'lxml')
-        match_links = soup.select('td.score-td a.score')
-        return {}
-
-        entity = {
-            'games_count': len(match_links),
-            'matches': []
-        }
-        for link in match_links:
-
-            tr = link.parent.parent
-            start_time_tag = tr.select('td.alLeft')[0]
-            owner_tag = tr.select_one('td.owner-td div.rel a.player')
-            guest_tag = tr.select_one('td.guests-td div.rel a.player')
-            owners_goals_tag = link.select_one('b span.s-left')
-            guests_goals_tag = link.select_one('b span.s-right')
-            status_match_tag = tr.select('td.alLeft')[-1]
-            
-            match = {
-                'url': link['href'],
-                'matchBegining': start_time_tag.text,
-                'ownerGoal': owners_goals_tag.text,
-                'guestGoal': guests_goals_tag.text if guests_goals_tag is not None else None,
-                'owner': owner_tag.text if owner_tag is not None else None,
-                'visitor': guest_tag.text if guest_tag is not None else None,
+        paragraph_count = len(soup.select('.game-info p'));
+        def check_p(p_numb):
+            if(paragraph_count > p_numb):
+                return soup.select('.game-info p')[p_numb]
+            else:
+                return None
+        def check_text(tag):
+            if(tag != None and tag.text != None): 
+                return tag.text
+            else:
+                return None
+        def fill_goals(GoalTag):
+            return {
+            "goleador": GoalTag.text if GoalTag is not None else None,
+            "goal_time": GoalTag.select_one('b').text
             }
-            entity['matches'].append(match)
+        print(paragraph_count)
+        score_tag = soup.select_one('.score.js-match-score')
+        owner_tag = soup.select_one('.command.floatL .about-command .titleH2')
+        visitor_tag = soup.select_one('.command.floatR .about-command .titleH2')
+        league_tag = soup.select('.game-info p a')[0]
+        date_tag = soup.select('.game-info p')[1]
+        stadium_tag = soup.select('.game-info p')[2]
+        status_tag = soup.select_one('.game-info .mB20.js-match-status')
+        judje_tag = check_p(3)
+        judgeAssistant_tag = check_p(4)
+        spareJudge = check_p(5)
+        ownerGoals_tag = soup.select('.js-first-team p')
+        visitorGoals_tag = soup.select('.js-second-team p')
+          
+        entity = {
+            'score': check_text(score_tag),
+            'owner': check_text(owner_tag),
+            'visitor': check_text(visitor_tag),
+            'league': check_text(league_tag), #кое-где пишет иномер тура
+            'status': check_text(league_tag),
+            'judje': check_text(judje_tag),
+            'judgeAssistant': check_text(judgeAssistant_tag),
+            'stadium': check_text(stadium_tag),
+            'date': check_text(date_tag),
+            # 'time': '18:30',
+            'ownerGoals': list(map(fill_goals, ownerGoals_tag)),
+            'visitorGoals': list(map(fill_goals, visitorGoals_tag))
+        }
+        print(entity['ownerGoals'][0]['goleador'])
         return entity
         
 
