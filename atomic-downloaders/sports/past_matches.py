@@ -30,7 +30,9 @@ class PastFootballDaysParser(BaseParser):
             obj = simplejson.loads(file)
             # print(obj)
             for match in obj['matches']:
-                yield match['url']
+                if match['id'] is None or match['id'] == 'None':
+                    continue
+                yield (match['url'], match['id'])
                 
 
                 # for url in matches:
@@ -44,6 +46,7 @@ class PastFootballDaysParser(BaseParser):
     def parse(self, text):
         soup = bs4.BeautifulSoup(text, 'lxml')
         match_links = soup.select('td.score-td a.score')
+        return {}
 
         entity = {
             'games_count': len(match_links),
@@ -80,10 +83,10 @@ class PastFootballDaysParser(BaseParser):
         pass
 
 namer = BasicNamer(
-    get_filename=lambda key: 'sports_date_%s.json' % (key.strftime('%Y-%m-%d')),
+    get_filename=lambda key: 'match_%s.html' % key[1],
     # get_url=lambda key: 'https://www.sports.ru/stat/football/center/all/%s/%s/%s.html' % (key.strftime('%Y'), key.strftime('%m'), key.strftime('%d')) 
     # simplejson(get_filename());
-    get_url=lambda key: 'https://www.sports.ru/stat/football/1020/match/1178427.html'
+    get_url=lambda key: key[0]
 )
 parser = PastFootballDaysParser(namer=namer)
 parser.start()
