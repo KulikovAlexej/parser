@@ -26,7 +26,6 @@ section .top_panel {
     margin-top: 15px; }
     section .top_panel .match_info div {
       padding: 5px;
-      border-bottom: 1px solid black;
       text-align: center; }
 section .bottom_panel .bottom_capture {
   margin-top: 10px;
@@ -57,8 +56,8 @@ section .bottom_panel .matches_list {
     section .bottom_panel .matches_list .left_list table tbody tr td {
       padding: 5px 10px;
       border: 1px solid black; }
-    section .bottom_panel .matches_list .left_list table tbody tr:hover {
-      background-color: red; }
+    section .bottom_panel .matches_list .left_list table tbody tr.active {
+      background-color: green; }
   section .bottom_panel .matches_list .right_list table {
     text-align: center;
     width: 100%; }
@@ -69,5 +68,7 @@ section .bottom_panel .matches_list {
     section .bottom_panel .matches_list .right_list table tbody tr td {
       padding: 5px 10px;
       border: 1px solid black; }
+    section .bottom_panel .matches_list .right_list table tbody tr.active {
+      background-color: green; }
 
 /*# sourceMappingURL=style.css.map */

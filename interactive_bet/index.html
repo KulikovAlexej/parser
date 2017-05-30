@@ -12,16 +12,23 @@
 <body>
     <section ng-controller='Panel'>
         <div class="container">
-            <div class="top_panel row">
-                <div class="title_source_left col-sm-4">{{ webSite.first }}</div>
-                <div class="match_info col-sm-4">
-                    <div class="league">{{selectedMatch.league}}</div>
-                    <div class="team_one">Барселона</div>
-                    <div class="team_one">Реал Мадрид</div>
-                    <div class="match_date">29.09.2017</div>
-                    <div class="match_time">22:00</div>
+            <div class="top_panel">
+                <div class="row">
+                    <div class="title_source_left col-sm-6">{{ webSite.first }}</div>
+                    <div class="title_source_right col-sm-6">{{ webSite.second }}</div>
                 </div>
-                <div class="title_source_right col-sm-4">{{ webSite.second }}</div>
+                <div class="row">
+                    <div class="match_info col-sm-6">
+                        <div class="league">{{firstMatch.league}}</div>
+                        <div class="team_one">{{firstMatch.owner}} {{firstMatch.score}} {{firstMatch.guest}}</div>
+                        <div class="match_date">{{firstMatch.date}} , {{firstMatch.time}}</div>
+                    </div>
+                    <div class="match_info col-sm-6">
+                        <div class="league">{{secondMatch.league}}</div>
+                        <div class="team_one">{{secondMatch.owner}} {{secondMatch.score}} {{secondMatch.guest}}</div>
+                        <div class="match_date">{{secondMatch.date}} , {{secondMatch.time}}</div>
+                    </div>
+                </div>
             </div>
             <div class="bottom_panel">
                 <div class="bottom_capture row">
@@ -44,14 +51,18 @@
                                 <td>Лига</td>
                                 <td>Хозяева</td>
                                 <td>Гости</td>
-                                <td>Счет</td> 
+                                <td>Счет</td>
+                                <td></td>  
+                                <td></td>
                             </thead>
                             <tbody>
-                                <tr ng-repeat='match in sources.first | filter : {league: selected_leagues, date: validateDate(match_day)}' ng-click='selectMatch(match)'>
+                                <tr ng-repeat='match in sources.first | filter : {league: selected_leagues, date: validateDate(match_day)}' ng-click='selectMatch(match)' ng-class='{ active: match.active }'>
                                     <td>{{match.league}}</td>
                                     <td>{{match.owner}}</td>
                                     <td>{{match.guest}}</td>
-                                    <td>{{match.score}}</td>    
+                                    <td>{{match.score}}</td>
+                                    <td ng-click="deleteOneMatch(match, sources.first)">X</td>
+                                    <td ng-click='openMatch($event, match, "firstMatch")'>Подробнее</td> 
                                 </tr> 
                             </tbody>
                         </table>
@@ -62,14 +73,18 @@
                                 <td>Процент совпадения</td>
                                 <td>Лига</td>
                                 <td>Матч</td>
-                                <td>Счет</td> 
+                                <td>Счет</td>
+                                <td></td>
+                                <td></td>
                             </thead>
                             <tbody>
-                                <tr ng-repeat='match in sources.second'>
+                                <tr ng-repeat='match in sources.second' ng-click='storeMatch($event, match)' ng-class='{ active: match.active }'>
                                     <td>-</td>
                                     <td>{{match.league}}</td>
                                     <td>{{match.owner + ' : ' + match.guest}}</td>
-                                    <td>{{match.score}}</td>    
+                                    <td>{{match.score}}</td>
+                                    <td ng-click='deleteOneMatch(match, sources.second)'>X</td> 
+                                    <td ng-click='openMatch($event, match, "secondMatch")'>Подробнее</td>    
                                 </tr> 
                             </tbody>
                         </table>

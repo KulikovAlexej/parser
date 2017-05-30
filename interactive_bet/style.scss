@@ -20,7 +20,7 @@ section{
       margin-top: 15px;
       div{
         padding: 5px;
-        border-bottom: 1px solid black;
+        // border-bottom: 1px solid black;
         text-align: center
       }
     }
@@ -68,8 +68,11 @@ section{
                 border: 1px solid black;
               }
               &:hover{
-                background-color: red;
+                // background-color: red;
               }
+            }
+            tr.active{
+              background-color: green;
             }
           }
         }
@@ -91,6 +94,9 @@ section{
                 padding: 5px 10px;
                 border: 1px solid black;
               }
+            }
+            tr.active{
+              background-color: green;
             }
           }
         }
