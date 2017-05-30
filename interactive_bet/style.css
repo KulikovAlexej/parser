@@ -1,0 +1,73 @@
+@font-face {
+  font-family: TahomaRegular;
+  src: url(fonts/TahomaRegular.ttf);
+  font-weight: 400;
+  font-style: normal; }
+@font-face {
+  font-family: TahomaBold;
+  src: url(fonts/TahomaBold.ttf);
+  font-weight: 700;
+  font-style: normal; }
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden; }
+
+section .top_panel {
+  background-color: lightblue; }
+  section .top_panel .title_source_left {
+    font-size: 20px; }
+  section .top_panel .title_source_right {
+    font-size: 20px;
+    text-align: right; }
+  section .top_panel .match_info {
+    margin-top: 15px; }
+    section .top_panel .match_info div {
+      padding: 5px;
+      border-bottom: 1px solid black;
+      text-align: center; }
+section .bottom_panel .bottom_capture {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: yellow; }
+  section .bottom_panel .bottom_capture .title_source_left {
+    font-size: 20px; }
+  section .bottom_panel .bottom_capture .title_source_right {
+    font-size: 20px;
+    text-align: right; }
+  section .bottom_panel .bottom_capture #reverse_block {
+    width: 50px;
+    height: 50px;
+    transform: translateX(-50%);
+    left: 50%;
+    position: relative; }
+    section .bottom_panel .bottom_capture #reverse_block img {
+      width: 100%; }
+section .bottom_panel .matches_list {
+  background-color: pink; }
+  section .bottom_panel .matches_list .left_list table {
+    width: 100%;
+    text-align: center; }
+    section .bottom_panel .matches_list .left_list table thead td {
+      padding: 10px 10px;
+      border: 1px solid black;
+      background-color: green; }
+    section .bottom_panel .matches_list .left_list table tbody tr td {
+      padding: 5px 10px;
+      border: 1px solid black; }
+    section .bottom_panel .matches_list .left_list table tbody tr:hover {
+      background-color: red; }
+  section .bottom_panel .matches_list .right_list table {
+    text-align: center;
+    width: 100%; }
+    section .bottom_panel .matches_list .right_list table thead td {
+      padding: 10px 10px;
+      border: 1px solid black;
+      background-color: green; }
+    section .bottom_panel .matches_list .right_list table tbody tr td {
+      padding: 5px 10px;
+      border: 1px solid black; }
+
+/*# sourceMappingURL=style.css.map */

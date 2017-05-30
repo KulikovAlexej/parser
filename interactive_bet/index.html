@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="App">
+<head>
+    <meta charset="UTF-8">
+    <title>Сравнение источников</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <script type="application/javascript" src="angular.js"></script>
+    <script type="application/javascript" src="angular-route.js"></script>
+    <script type="application/javascript" src="main.js"></script>
+</head>
+<body>
+    <section ng-controller='Panel'>
+        <div class="container">
+            <div class="top_panel row">
+                <div class="title_source_left col-sm-4">{{ webSite.first }}</div>
+                <div class="match_info col-sm-4">
+                    <div class="league">{{selectedMatch.league}}</div>
+                    <div class="team_one">Барселона</div>
+                    <div class="team_one">Реал Мадрид</div>
+                    <div class="match_date">29.09.2017</div>
+                    <div class="match_time">22:00</div>
+                </div>
+                <div class="title_source_right col-sm-4">{{ webSite.second }}</div>
+            </div>
+            <div class="bottom_panel">
+                <div class="bottom_capture row">
+                    <div class="col-sm-4">
+                        <div class="title_source_left">{{ webSite.first }}</div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div id="reverse_block">
+                            <img src="img/refresh blue.png" alt="">    
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="title_source_right">{{ webSite.second }}</div>
+                    </div>
+                </div>
+                <div class="matches_list row">
+                    <div class="left_list col-sm-6">
+                        <table>
+                            <thead>
+                                <td>Лига</td>
+                                <td>Хозяева</td>
+                                <td>Гости</td>
+                                <td>Счет</td> 
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat='match in sources.first | filter : {league: selected_leagues, date: validateDate(match_day)}' ng-click='selectMatch(match)'>
+                                    <td>{{match.league}}</td>
+                                    <td>{{match.owner}}</td>
+                                    <td>{{match.guest}}</td>
+                                    <td>{{match.score}}</td>    
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="right_list col-sm-6">
+                        <table>
+                            <thead>
+                                <td>Процент совпадения</td>
+                                <td>Лига</td>
+                                <td>Матч</td>
+                                <td>Счет</td> 
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat='match in sources.second'>
+                                    <td>-</td>
+                                    <td>{{match.league}}</td>
+                                    <td>{{match.owner + ' : ' + match.guest}}</td>
+                                    <td>{{match.score}}</td>    
+                                </tr> 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <select name="league" id="select_league" ng-model='selected_leagues' ng-options='league for league in leagues'></select>
+                        <input type="date" ng-model='match_day'>
+                    </div>
+                    <div class="manipulate_block">
+                        <button>Отложить матч</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

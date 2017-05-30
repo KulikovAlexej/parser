@@ -1,0 +1,100 @@
+@font-face{font-family:TahomaRegular;src:url(fonts/TahomaRegular.ttf);font-weight:400;font-style:normal}@font-face{font-family:TahomaBold;src:url(fonts/TahomaBold.ttf);font-weight:700;font-style:normal}
+.clearfix:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+section{
+  .top_panel{
+    background-color: lightblue;
+    .title_source_left{
+      font-size: 20px;
+    }
+    .title_source_right{
+      font-size: 20px;
+      text-align: right;
+    }
+    .match_info{
+      margin-top: 15px;
+      div{
+        padding: 5px;
+        border-bottom: 1px solid black;
+        text-align: center
+      }
+    }
+  }
+  .bottom_panel{
+    .bottom_capture{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      background-color: yellow;
+      .title_source_left{
+        font-size: 20px;
+      }
+      .title_source_right{
+        font-size: 20px;
+        text-align: right;
+      }
+      #reverse_block{
+        width: 50px;
+        height: 50px;
+        transform: translateX(-50%);
+        left: 50%;
+        position: relative;
+        img{
+          width: 100%
+        }
+      }  
+    }   
+    .matches_list{
+      background-color: pink;
+      .left_list{
+        table{
+          width: 100%;
+          text-align: center;
+          thead{
+            td{
+              padding: 10px 10px;
+              border: 1px solid black;
+              background-color: green;
+            }
+          }
+          tbody{
+            tr{
+              td{
+                padding: 5px 10px;
+                border: 1px solid black;
+              }
+              &:hover{
+                background-color: red;
+              }
+            }
+          }
+        }
+      }
+      .right_list{
+        table{
+          text-align: center;
+          width: 100%;
+          thead{
+            td{
+              padding: 10px 10px;
+              border: 1px solid black;
+              background-color: green;
+            }
+          }
+          tbody{
+            tr{
+              td{
+                padding: 5px 10px;
+                border: 1px solid black;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
